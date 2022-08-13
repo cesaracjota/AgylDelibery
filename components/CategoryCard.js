@@ -9,6 +9,7 @@ const CategoryCard = ({ imgUrl, title }) => {
                     uri: imgUrl,
                 }}
                 className="w-24 h-24 opacity-30"
+                resizeMode='cover'
             />
             <Text className="absolute bottom-2 left-2 text-white font-bold">
                 {title}
