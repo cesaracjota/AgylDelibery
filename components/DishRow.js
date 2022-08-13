@@ -1,0 +1,54 @@
+import React, { useState } from 'react'
+import { View, Text, TouchableOpacity, Image } from 'react-native'
+import Currency from 'react-currency-formatter';
+import { MinusCircleIcon, PlusCircleIcon } from 'react-native-heroicons/solid';
+
+const DishRow = ({ id, name, description, price, image }) => {
+
+  const [isPressed, setIsPressed] = useState(false);
+
+  return (
+    <>
+      <TouchableOpacity onPress={() => setIsPressed(!isPressed)} 
+        className={`bg-white border p-4 border-gray-200 
+          ${ isPressed && "border-b-0" }`
+        }>
+          <View className="flex-row">
+            <View className="flex-1 pr-2">
+                <Text className='font-bold text-lg'>{name}</Text>
+                <Text className='text-gray-400'>{description}</Text>
+                <Text className='text-gray-400 mt-2'>
+                    <Currency quantity={price} currency='USD' />
+                </Text>
+            </View>
+            <View className='flex-row items-center justify-between px-4'>
+                <Image
+                  style={{ 
+                    borderWidth: 1,
+                    borderColor: '#F3F3F3',
+                  }}
+                  source={{ uri: image }}
+                  className="h-20 w-20 bg-gray-300 p-4"
+                  />
+            </View>
+          </View>
+      </TouchableOpacity>
+      {isPressed && (
+        <View className="bg-white px-4">
+          <View className="flex-row items-center space-x-2 pb-3">
+            <TouchableOpacity>
+              <MinusCircleIcon color="#00CC88" size={40}/>
+            </TouchableOpacity>
+            <Text>0</Text>
+            <TouchableOpacity>
+              <PlusCircleIcon color="#00CC88" size={40}/>
+            </TouchableOpacity>
+            <Text>0</Text>
+          </View>
+        </View>
+      )}
+    </>
+  )
+}
+
+export default DishRow
